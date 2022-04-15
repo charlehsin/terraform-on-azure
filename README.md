@@ -2,7 +2,7 @@
 
 ## Set up Terraform and Azure CLI
 
-Follow the references to set up Terraform and Azure CLI on Windows with Bash.
+Follow the references to set up Terraform and Azure CLI on Windows with Bash. We will use the authentication via Azure CLI, not the service principal. If you have privilege to create an Azure service principal, please do that.
 
 Some useful Azure CLI commands
 - az login
