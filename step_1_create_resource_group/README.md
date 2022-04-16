@@ -1,5 +1,7 @@
 # Create a resource group
 
+This is the 1st basic task, just to create a new resource group in Azure. This utilizes a "random" resource to create a random resource group name.
+
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli), and we will follow [Get Started: Create an Azure resource group using Terraform](https://docs.microsoft.com/en-us/azure/developer/terraform/create-resource-group?tabs=azure-cli) and [Build Infrastructure - Terraform Azure Example](https://learn.hashicorp.com/tutorials/terraform/azure-build?in=terraform/azure-get-started).
 
 Open a Bash.
