@@ -24,7 +24,7 @@ variable "resource_group_tag_team" {
 }
 
 variable "virtual_network_name" {
-  default     = "myTFVnet"
+  default     = "terraform_vnet"
   description = "Name of the virtual network."
 }
 
