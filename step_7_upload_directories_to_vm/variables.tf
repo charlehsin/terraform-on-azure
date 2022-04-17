@@ -140,3 +140,12 @@ variable "virtual_machine" {
     "timezone"                     = "Pacific Standard Time"
   }
 }
+
+variable "winrm" {
+  type = map(string)
+  default = {
+    "port"    = "5985"
+    "https"   = "false"
+    "timeout" = "15m"
+  }
+}

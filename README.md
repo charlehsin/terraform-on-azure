@@ -10,6 +10,12 @@ Some useful Azure CLI commands
 - az account show
 - az account set --subscription "<subscription_id_or_subscription_name>"
 
+## Backlog itmes to explore
+
+- Add a Windows VM into existing subnet and join a domain.
+- Create an Azure AD.
+- Add a Windows VM into existing subnet and joint the domain in Azure AD.
+
 ## References
 
 - [Get Started - Azure](https://learn.hashicorp.com/collections/terraform/azure-get-started)
