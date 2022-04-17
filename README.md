@@ -10,11 +10,9 @@ Some useful Azure CLI commands
 - az account show
 - az account set --subscription "<subscription_id_or_subscription_name>"
 
-## Backlog itmes to explore
+## Backlog items to explore
 
-- Add a Windows VM into existing subnet and join a domain.
-- Create an Azure AD.
-- Add a Windows VM into existing subnet and joint the domain in Azure AD.
+- Create an Azure AD B2C and set up tenant.
 
 ## References
 
