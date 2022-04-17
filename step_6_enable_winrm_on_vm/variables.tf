@@ -1,5 +1,5 @@
 variable "tenant_id" {
-  default     = "xxxxx-xxxx-xxxxx-xxxx-xxxxx"
+  default     = "46c98d88-e344-4ed4-8496-4ed7712e255d"
   description = "Azure tenant ID."
 }
 
@@ -48,7 +48,7 @@ variable "security_group_name" {
   description = "Name of the security group."
 }
 
-variable "security_group_inbound_rules_1" {
+variable "security_group_inbound_rules_rdp" {
   type = map(string)
   default = {
     "name"                       = "RDP"
@@ -57,12 +57,11 @@ variable "security_group_inbound_rules_1" {
     "protocol"                   = "Tcp"
     "source_port_range"          = "*"
     "destination_port_range"     = "3389"
-    "source_address_prefix"      = "134.134.137.84"
     "destination_address_prefix" = "*"
   }
 }
 
-variable "security_group_inbound_rules_2" {
+variable "security_group_inbound_rules_ssh" {
   type = map(string)
   default = {
     "name"                       = "SSH"
@@ -71,21 +70,33 @@ variable "security_group_inbound_rules_2" {
     "protocol"                   = "Tcp"
     "source_port_range"          = "*"
     "destination_port_range"     = "22"
-    "source_address_prefix"      = "134.134.137.84"
     "destination_address_prefix" = "*"
   }
 }
 
-variable "security_group_inbound_rules_3" {
+variable "security_group_inbound_rules_http" {
   type = map(string)
   default = {
-    "name"                       = "HTTPS"
+    "name"                       = "HTTP"
     "priority"                   = 102
     "access"                     = "Allow"
     "protocol"                   = "Tcp"
     "source_port_range"          = "*"
-    "destination_port_range"     = "443"
+    "destination_port_range"     = "80"
     "source_address_prefix"      = "*"
+    "destination_address_prefix" = "*"
+  }
+}
+
+variable "security_group_inbound_rules_winrm" {
+  type = map(string)
+  default = {
+    "name"                       = "WinRM"
+    "priority"                   = 103
+    "access"                     = "Allow"
+    "protocol"                   = "Tcp"
+    "source_port_range"          = "*"
+    "destination_port_range"     = "5985"
     "destination_address_prefix" = "*"
   }
 }
@@ -118,8 +129,8 @@ variable "virtual_machine" {
   default = {
     "name"                         = "tfvmcftest"
     "size"                         = "Standard_D2s_v4"
-    "admin_username"               = "XXX"
-    "admin_password"               = "XXX"
+    "admin_username"               = "developer"
+    "admin_password"               = "P@ssw0rd1234"
     "os_disk_caching"              = "ReadWrite"
     "os_disk_storage_account_type" = "Premium_LRS"
     "image_publisher"              = "MicrosoftWindowsServer"

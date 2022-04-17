@@ -11,11 +11,11 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 
 This is based on top of the terraform files in "step_3_add_securitygroup_and_subnet".
 
-Open a Bash.
+Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
 1. Run "az account show" to find the tenant ID.
 2. Check the main.tf, variables.tf, and output.tf files. Update the tenant ID at variables.tf.
-3. Run "terraform init". If you are using VPN and your proxies are not set up correctly, you may need to disconnect from VPN.
+3. Run "terraform init".
 4. Run "terraform fmt" to auto format our .tf files.
 5. Run "terraform validate" to validate our configuration.
 6. Run "terraform plan -out main.tfplan" to see what will be provisioned.

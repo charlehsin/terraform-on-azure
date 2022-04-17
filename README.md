@@ -17,3 +17,4 @@ Some useful Azure CLI commands
 - [Authenticating using Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli)
 - [How to Build with Terraform: Azure VMs (Windows)](https://adamtheautomator.com/terraform-azure-vm/)
 - [Terraform documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine)
+- [Terraform Provisioners](https://www.terraform.io/language/resources/provisioners/syntax)

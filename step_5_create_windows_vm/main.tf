@@ -141,8 +141,4 @@ resource "azurerm_windows_virtual_machine" "terramform_vm" {
     sku       = var.virtual_machine["image_sku"]
     version   = var.virtual_machine["image_version"]
   }
-
-  boot_diagnostics {
-    storage_account_uri = var.virtual_machine["storage_account_uri"]
-  }
 }
