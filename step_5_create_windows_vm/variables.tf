@@ -4,7 +4,7 @@ variable "tenant_id" {
 }
 
 variable "resource_group_name" {
-  default     = "terraform_rg"
+  default     = "terraform_rg1"
   description = "Name of the resource group."
 }
 
@@ -97,7 +97,7 @@ variable "public_ip" {
     "allocation_method" = "Static"
     "sku"               = "Standard"
     "sku_tier"          = "Regional"
-    "domain_name_label" = "terraformvmcftest"
+    "domain_name_label" = "tfvmcftest"
   }
 }
 
@@ -110,5 +110,23 @@ variable "network_interface" {
     "ip_configuration_private_ip_address_version"    = "IPv4"
     "ip_configuration_private_ip_address_allocation" = "Dynamic"
     "ip_configuration_primary"                       = "true"
+  }
+}
+
+variable "virtual_machine" {
+  type = map(string)
+  default = {
+    "name"                         = "tfvmcftest"
+    "size"                         = "Standard_D4s_v5"
+    "admin_username"               = "XXX"
+    "admin_password"               = "XXX"
+    "os_disk_caching"              = "ReadWrite"
+    "os_disk_storage_account_type" = "Premium_LRS"
+    "image_publisher"              = "MicrosoftWindowsServer"
+    "image_offer"                  = "WindowsServer"
+    "image_sku"                    = "2019-Datacenter"
+    "image_version"                = "latest"
+    "timezone"                     = "Pacific Standard Time"
+    "storage_account_uri"          = "https://xxx.blob.core.windows.net/"
   }
 }

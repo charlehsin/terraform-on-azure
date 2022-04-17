@@ -117,3 +117,32 @@ resource "azurerm_network_interface_security_group_association" "netinf_sg_assoc
   network_interface_id      = azurerm_network_interface.net_inf.id
   network_security_group_id = azurerm_network_security_group.sg.id
 }
+
+resource "azurerm_windows_virtual_machine" "terramform_vm" {
+  name                = var.virtual_machine["name"]
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = var.resource_group_location
+  size                = var.virtual_machine["size"]
+  admin_username      = var.virtual_machine["admin_username"]
+  admin_password      = var.virtual_machine["admin_password"]
+  network_interface_ids = [
+    azurerm_network_interface.net_inf.id,
+  ]
+  timezone = var.virtual_machine["timezone"]
+
+  os_disk {
+    caching              = var.virtual_machine["os_disk_caching"]
+    storage_account_type = var.virtual_machine["os_disk_storage_account_type"]
+  }
+
+  source_image_reference {
+    publisher = var.virtual_machine["image_publisher"]
+    offer     = var.virtual_machine["image_offer"]
+    sku       = var.virtual_machine["image_sku"]
+    version   = var.virtual_machine["image_version"]
+  }
+
+  boot_diagnostics {
+    storage_account_uri = var.virtual_machine["storage_account_uri"]
+  }
+}
