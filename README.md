@@ -12,7 +12,10 @@ Some useful Azure CLI commands
 
 ## Backlog items to explore
 
+- Improve the file structure. Use modules. Improve the variable type, e.g., array, object.
 - Create an Azure AD B2C and set up tenant.
+- Create load balancer and add a vm to it.
+- Create a traditional Azure AD, add users and let VM join.
 
 ## References
 
