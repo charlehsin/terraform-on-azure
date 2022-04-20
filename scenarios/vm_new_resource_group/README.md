@@ -1,6 +1,6 @@
 # Create new infrastructure for a Windows server VM by using modules
 
-This creates a new infrastructure (new resource group) and creates a new Windows server virtual machine in this resource group. This only enabled WinRM (via HTTP) on this virtual machine, then upload some files, and then run some remote commands.
+This creates a new infrastructure (new resource group) and creates a new Windows server virtual machine in this resource group. This enables WinRM (via HTTP) on this virtual machine, then uploads some files, and then runs some remote commands (installing IIS).
 
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli), and we will follow the following
 
