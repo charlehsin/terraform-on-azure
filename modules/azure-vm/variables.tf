@@ -58,11 +58,6 @@ variable "virtual_machine_size" {
   type        = string
 }
 
-variable "virtual_machine_size" {
-  description = "Size of the virtual machine."
-  type        = string
-}
-
 variable "virtual_machine_admin_username" {
   description = "User name of the admin user."
   type        = string

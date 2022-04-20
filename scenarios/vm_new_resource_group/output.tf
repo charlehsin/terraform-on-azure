@@ -1,19 +1,14 @@
-output "resource_group_name" {
-  value = azurerm_resource_group.rg.name
+output "virtual_machine_id" {
+  description = "ID of the virtual machine."
+  value       = module.virtual_machine.virtual_machine_id
 }
 
-output "resource_group_id" {
-  value = azurerm_resource_group.rg.id
+output "virtual_machine_private_ip" {
+  description = "Primary Private IP Address of the virtual network."
+  value       = module.virtual_machine.virtual_machine_private_ip
 }
 
-output "network_interface_private_ip_address" {
-  value = azurerm_network_interface.net_inf.private_ip_address
-}
-
-output "public_ip_address" {
-  value = azurerm_public_ip.public_ip.ip_address
-}
-
-output "public_ip_fqdn" {
-  value = azurerm_public_ip.public_ip.fqdn
+output "virtual_machine_public_ip" {
+  description = "Primary Public IP Address of the virtual network."
+  value       = module.virtual_machine.virtual_machine_public_ip
 }

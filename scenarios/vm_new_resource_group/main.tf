@@ -5,184 +5,60 @@ provider "azurerm" {
 }
 
 module "resource_group" {
-  source = "./modules/azure-resource-group"
+  source = "../../modules/azure-resource-group"
 
-  resource_group_name     = "<UNIQUE BUCKET NAME>"
-  resource_group_location = ""
+  resource_group_name     = var.resource_group_name
+  resource_group_location = var.resource_group_location
 }
 
 module "vnet_subnet" {
-  source = "./modules/azure-vnet-subnet"
+  source = "../../modules/azure-vnet-subnet"
 
-  resource_group_name           = "<UNIQUE BUCKET NAME>"
-  resource_group_location       = ""
-  virtual_network_name          = ""
-  virtual_network_address_space = [""]
-  subnet_name                   = ""
-  subnet_name_address_space     = [""]
+  resource_group_name           = var.resource_group_name
+  resource_group_location       = var.resource_group_location
+  virtual_network_name          = var.virtual_network_name
+  virtual_network_address_space = var.virtual_network_address_space
+  subnet_name                   = var.subnet_name
+  subnet_name_address_space     = var.subnet_name_address_space
 
   depends_on = [module.resource_group]
 }
 
-resource "azurerm_network_security_group" "sg" {
-  name                = var.security_group_name
-  location            = var.resource_group_location
-  resource_group_name = azurerm_resource_group.rg.name
+module "security_group" {
+  source = "../../modules/azure-security-group"
+
+  resource_group_name                = var.resource_group_name
+  resource_group_location            = var.resource_group_location
+  security_group_name                = var.security_group_name
+  inbound_rule_source_address_prefix = "${chomp(data.http.myip.body)}/32"
+
+  depends_on = [module.resource_group]
 }
 
-resource "azurerm_network_security_rule" "sg_rule_rdp" {
-  name                        = var.security_group_inbound_rules_rdp["name"]
-  priority                    = var.security_group_inbound_rules_rdp["priority"]
-  direction                   = "Inbound"
-  access                      = var.security_group_inbound_rules_rdp["access"]
-  protocol                    = var.security_group_inbound_rules_rdp["protocol"]
-  source_port_range           = var.security_group_inbound_rules_rdp["source_port_range"]
-  destination_port_range      = var.security_group_inbound_rules_rdp["destination_port_range"]
-  source_address_prefix       = "${chomp(data.http.myip.body)}/32"
-  destination_address_prefix  = var.security_group_inbound_rules_rdp["destination_address_prefix"]
-  resource_group_name         = azurerm_resource_group.rg.name
-  network_security_group_name = azurerm_network_security_group.sg.name
-}
+module "virtual_machine" {
+  source = "../../modules/azure-vm"
 
-resource "azurerm_network_security_rule" "sg_rule_ssh" {
-  name                        = var.security_group_inbound_rules_ssh["name"]
-  priority                    = var.security_group_inbound_rules_ssh["priority"]
-  direction                   = "Inbound"
-  access                      = var.security_group_inbound_rules_ssh["access"]
-  protocol                    = var.security_group_inbound_rules_ssh["protocol"]
-  source_port_range           = var.security_group_inbound_rules_ssh["source_port_range"]
-  destination_port_range      = var.security_group_inbound_rules_ssh["destination_port_range"]
-  source_address_prefix       = "${chomp(data.http.myip.body)}/32"
-  destination_address_prefix  = var.security_group_inbound_rules_winrm["destination_address_prefix"]
-  resource_group_name         = azurerm_resource_group.rg.name
-  network_security_group_name = azurerm_network_security_group.sg.name
-}
+  resource_group_name              = var.resource_group_name
+  resource_group_location          = var.resource_group_location
+  public_ip_name                   = var.public_ip["name"]
+  public_ip_allocation_method      = var.public_ip["allocation_method"]
+  public_ip_sku                    = var.public_ip["sku"]
+  public_ip_domain_name_label      = var.public_ip["domain_name_label"]
+  network_interface_name           = var.network_interface["name"]
+  ip_configuration_name            = var.network_interface["ip_configuration_name"]
+  subnet_id                        = module.vnet_subnet.subnet_id
+  security_group_id                = module.security_group.security_group_id
+  virtual_machine_name             = var.virtual_machine_name
+  virtual_machine_size             = var.virtual_machine_size
+  virtual_machine_admin_username   = var.virtual_machine_admin_username
+  virtual_machine_admin_password   = var.virtual_machine_admin_password
+  virtual_machine_timezone         = var.virtual_machine_timezone
+  virtual_machine_custom_data_path = "${path.module}/winrm.ps1"
+  virtual_machine_first_cmd_path   = "${path.module}/firstlogincommand.xml"
+  source_image_sku                 = var.source_image_sku
+  upload_source                    = "${path.module}/to_upload/"
+  upload_destination               = var.file_upload_target
+  remote_commands                  = var.remote_commands
 
-resource "azurerm_network_security_rule" "sg_rule_http" {
-  name                        = var.security_group_inbound_rules_http["name"]
-  priority                    = var.security_group_inbound_rules_http["priority"]
-  direction                   = "Inbound"
-  access                      = var.security_group_inbound_rules_http["access"]
-  protocol                    = var.security_group_inbound_rules_http["protocol"]
-  source_port_range           = var.security_group_inbound_rules_http["source_port_range"]
-  destination_port_range      = var.security_group_inbound_rules_http["destination_port_range"]
-  source_address_prefix       = var.security_group_inbound_rules_http["source_address_prefix"]
-  destination_address_prefix  = var.security_group_inbound_rules_http["destination_address_prefix"]
-  resource_group_name         = azurerm_resource_group.rg.name
-  network_security_group_name = azurerm_network_security_group.sg.name
-}
-
-resource "azurerm_network_security_rule" "sg_rule_winrm" {
-  name                        = var.security_group_inbound_rules_winrm["name"]
-  priority                    = var.security_group_inbound_rules_winrm["priority"]
-  direction                   = "Inbound"
-  access                      = var.security_group_inbound_rules_winrm["access"]
-  protocol                    = var.security_group_inbound_rules_winrm["protocol"]
-  source_port_range           = var.security_group_inbound_rules_winrm["source_port_range"]
-  destination_port_range      = var.security_group_inbound_rules_winrm["destination_port_range"]
-  source_address_prefix       = "${chomp(data.http.myip.body)}/32"
-  destination_address_prefix  = var.security_group_inbound_rules_winrm["destination_address_prefix"]
-  resource_group_name         = azurerm_resource_group.rg.name
-  network_security_group_name = azurerm_network_security_group.sg.name
-}
-
-resource "azurerm_public_ip" "public_ip" {
-  name                = var.public_ip["name"]
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = var.resource_group_location
-  allocation_method   = var.public_ip["allocation_method"]
-  sku                 = var.public_ip["sku"]
-  sku_tier            = var.public_ip["sku_tier"]
-  domain_name_label   = var.public_ip["domain_name_label"]
-}
-
-resource "azurerm_network_interface" "net_inf" {
-  name                          = var.network_interface["name"]
-  location                      = var.resource_group_location
-  resource_group_name           = azurerm_resource_group.rg.name
-  enable_accelerated_networking = var.network_interface["enable_accelerated_networking"]
-
-  ip_configuration {
-    name                          = var.network_interface["ip_configuration_name"]
-    subnet_id                     = azurerm_subnet.subnet.id
-    private_ip_address_version    = var.network_interface["ip_configuration_private_ip_address_version"]
-    private_ip_address_allocation = var.network_interface["ip_configuration_private_ip_address_allocation"]
-    public_ip_address_id          = azurerm_public_ip.public_ip.id
-    primary                       = var.network_interface["ip_configuration_primary"]
-  }
-}
-
-resource "azurerm_network_interface_security_group_association" "netinf_sg_association" {
-  network_interface_id      = azurerm_network_interface.net_inf.id
-  network_security_group_id = azurerm_network_security_group.sg.id
-}
-
-resource "azurerm_windows_virtual_machine" "terramform_vm" {
-  name                = var.virtual_machine["name"]
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = var.resource_group_location
-  size                = var.virtual_machine["size"]
-  admin_username      = var.virtual_machine["admin_username"]
-  admin_password      = var.virtual_machine["admin_password"]
-  network_interface_ids = [
-    azurerm_network_interface.net_inf.id,
-  ]
-  timezone = var.virtual_machine["timezone"]
-
-  os_disk {
-    caching              = var.virtual_machine["os_disk_caching"]
-    storage_account_type = var.virtual_machine["os_disk_storage_account_type"]
-  }
-
-  source_image_reference {
-    publisher = var.virtual_machine["image_publisher"]
-    offer     = var.virtual_machine["image_offer"]
-    sku       = var.virtual_machine["image_sku"]
-    version   = var.virtual_machine["image_version"]
-  }
-
-  custom_data        = filebase64("${path.module}/winrm.ps1")
-  provision_vm_agent = "true"
-  winrm_listener {
-    protocol = "Http"
-  }
-  additional_unattend_content {
-    setting = "AutoLogon"
-    content = "<AutoLogon><Password><Value>${var.virtual_machine["admin_password"]}</Value></Password><Enabled>true</Enabled><LogonCount>1</LogonCount><Username>${var.virtual_machine["admin_username"]}</Username></AutoLogon>"
-  }
-  additional_unattend_content {
-    setting = "FirstLogonCommands"
-    content = file("${path.module}/firstlogincommand.xml")
-  }
-
-  # Upload the content of to_upload folder to the target's C:/upload_files folder.
-  provisioner "file" {
-    connection {
-      host     = azurerm_public_ip.public_ip.ip_address
-      type     = "winrm"
-      port     = var.winrm["port"]
-      https    = var.winrm["https"]
-      timeout  = var.winrm["timeout"]
-      user     = var.virtual_machine["admin_username"]
-      password = var.virtual_machine["admin_password"]
-    }
-    source      = "${path.module}/to_upload/"
-    destination = "C:/upload_files"
-  }
-
-  # Run the uploaded script.
-  provisioner "remote-exec" {
-    connection {
-      host     = azurerm_public_ip.public_ip.ip_address
-      type     = "winrm"
-      port     = var.winrm["port"]
-      https    = var.winrm["https"]
-      timeout  = var.winrm["timeout"]
-      user     = var.virtual_machine["admin_username"]
-      password = var.virtual_machine["admin_password"]
-    }
-    inline = [
-      "powershell.exe -sta -ExecutionPolicy Unrestricted -file C:/upload_files/dir1/installiis.ps1",
-    ]
-  }
+  depends_on = [module.resource_group, module.vnet_subnet, module.security_group]
 }

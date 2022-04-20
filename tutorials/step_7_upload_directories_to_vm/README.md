@@ -21,7 +21,7 @@ This is based on top of the terraform files in "step_6_enable_winrm_on_vm".
 Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
 1. Run "az account show" to find the tenant ID.
-2. Check the main.tf, variables.tf, and output.tf files. Update the tenant ID at variables.tf. Update the VM account and password at variables.tf. Update the storage account uri at variables.tf.
+2. Check the main.tf, variables.tf, and output.tf files. Update the tenant ID at variables.tf. Update the VM account and password at variables.tf.
 3. Run "terraform init".
 4. Run "terraform fmt" to auto format our .tf files.
 5. Run "terraform validate" to validate our configuration.

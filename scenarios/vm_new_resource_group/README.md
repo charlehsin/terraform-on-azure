@@ -1,6 +1,6 @@
-# Modify step_7 codes to use module structure
+# Create new infrastructure for a Windows server VM by using modules
 
-This ???
+This creates a new infrastructure (new resource group) and creates a new Windows server virtual machine in this resource group. This only enabled WinRM (via HTTP) on this virtual machine, then upload some files, and then run some remote commands.
 
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli), and we will follow the following
 
@@ -12,7 +12,13 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
 1. Run "az account show" to find the tenant ID.
-2. Check the ???. Update the ??? at ???.
+2. Check secret.tfvars file and update the values.
 3. Run "terraform init".
 4. Run "terraform fmt -recursive".
 5. Run "terraform validate" to validate our configuration.
+6. Run "terraform plan -out main.tfplan -var-file=./secret.tfvars" to see what will be provisioned.
+7. Run "terraform apply main.tfplan" to do the provisioning.
+8. Run "terraform show" to see the new state.
+9. Run "terraform state list" to see the latest list of resources managed.
+10. Run some output commands, e.g., "echo "$(terraform output virtual_machine_id)"", to verify the result.
+11. Run "terraform plan -destroy -out main.destroy.tfplan -var-file=./secret.tfvars" and "terraform apply main.destroy.tfplan" to clean up the resources.
