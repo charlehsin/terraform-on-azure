@@ -7,6 +7,7 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 - [stack overflow discussion](https://stackoverflow.com/questions/69390742/terraform-windows-server-2016-adding-and-running-scripts-using-winery#69401460)
 - [Custom data](https://docs.microsoft.com/en-us/azure/virtual-machines/custom-data)
 - [Sample winrm.ps1 to set up WinRM](https://gist.github.com/clong/959bc5abe14cb5989c985d4156b5c335)
+- [Terraform Provisioners](https://www.terraform.io/language/resources/provisioners/syntax)
 - [remote-exec Provisioner](https://www.terraform.io/language/resources/provisioners/remote-exec)
 - [When the Provisioner runs](https://www.terraform.io/language/resources/provisioners/syntax#creation-time-provisioners)
 
