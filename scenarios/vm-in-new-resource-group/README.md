@@ -1,6 +1,6 @@
 # Create new infrastructure for a Windows server VM by using modules
 
-This creates a new infrastructure (new resource group) and creates a new Windows server virtual machine in this resource group. This enables WinRM (via HTTP) on this virtual machine, then uploads some files, and then runs some remote commands (installing IIS).
+This creates a new infrastructure (new resource group) and creates a new Windows server virtual machine in this resource group. This virtual machine is added to a public load balancer pool. Also, this enables WinRM (via HTTP) on this virtual machine, then uploads some files, and then runs some remote commands (installing IIS).
 
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli), and we will follow the following
 
@@ -11,7 +11,7 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 
 Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
-1. Run "az account show" to find the tenant ID.
+1. Run "az account set --subscription <subscription_id_or_subscription_name>" to set correct subscription, and then "az account show" to find the tenant ID.
 2. Check secret.tfvars file and update the values.
 3. Run "terraform init".
 4. Run "terraform fmt -recursive".
