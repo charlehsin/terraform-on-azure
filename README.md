@@ -27,4 +27,6 @@ References
 ## Backlog items to explore
 
 - Create a traditional Azure AD, add users and let VM join.
+   - [Azure AD domain service](https://docs.microsoft.com/en-us/azure/active-directory-domain-services/)
+- Install docker on Windows VM.
 - Create an Azure AD B2C (tenant, user flow, etc).

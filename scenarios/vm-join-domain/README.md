@@ -6,6 +6,8 @@ This creates a Windows server virtual machine in the existing infrastructure (ex
 2. Add the computer to the domain.
 3. Delete the sensitive script file with credentials.  Note: This is just a temporary approach and should not be used in production. Need a more secure approach to handle the credentials.
 
+Then this virtual machine is added to an existing load balancer.
+
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli), and we will follow the following
 
 - [Reuse Configuration with Modules](https://learn.hashicorp.com/collections/terraform/modules?utm_source=WEBSITE&utm_medium=WEB_IO&utm_offer=ARTICLE_PAGE&utm_content=DOCS)

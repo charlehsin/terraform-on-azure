@@ -12,3 +12,8 @@ output "virtual_machine_public_ip" {
   description = "Primary Public IP Address of the virtual network."
   value       = azurerm_windows_virtual_machine.vm.public_ip_address
 }
+
+output "network_interface_id" {
+  description = "ID of the network interface."
+  value       = azurerm_network_interface.net_inf.id
+}

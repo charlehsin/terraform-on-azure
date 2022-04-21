@@ -31,3 +31,8 @@ module "virtual_machine" {
 
   depends_on = []
 }
+resource "azurerm_network_interface_backend_address_pool_association" "example" {
+  network_interface_id    = module.virtual_machine.network_interface_id
+  ip_configuration_name   = var.network_interface["ip_configuration_name"]
+  backend_address_pool_id = data.azurerm_lb_backend_address_pool.example.id
+}

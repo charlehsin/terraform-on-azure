@@ -1,16 +1,16 @@
 variable "tenant_id" {
-  description = "Azure tenant ID."
+  description = "ID of an existing Azure tenant."
   type        = string
   sensitive   = true
 }
 
 variable "resource_group_name" {
-  description = "Name of the resource group."
+  description = "Name of the existing resource group."
   type        = string
 }
 
 variable "resource_group_location" {
-  description = "Location of the resource group."
+  description = "Location of the existing resource group."
   type        = string
 }
 
@@ -35,13 +35,13 @@ variable "network_interface" {
 }
 
 variable "subnet_id" {
-  description = "ID of the subnet."
+  description = "ID of the existing subnet."
   type        = string
   sensitive   = true
 }
 
 variable "security_group_id" {
-  description = "ID of the security group."
+  description = "ID of the existing security group."
   type        = string
   sensitive   = true
 }
@@ -97,4 +97,25 @@ variable "remote_commands" {
     "powershell.exe -sta -ExecutionPolicy Unrestricted -file C:/upload_files/setup/setup_join_domain.ps1",
     "powershell.exe -sta -ExecutionPolicy Unrestricted -Command {Remove-Item C:/upload_files/setup/setup_join_domain.ps1 -Force}",
   ]
+}
+
+variable "virtual_network_name" {
+  description = "Name of the existing virtual network."
+  type        = string
+}
+
+variable "load_balancer_name" {
+  description = "Name of the existing load balancer."
+  type        = string
+}
+
+variable "backend_address_pool_name" {
+  description = "Name of the existing backend address pool."
+  type        = string
+}
+
+variable "backend_address_pool_address_name" {
+  description = "Name of the backend address pool address."
+  type        = string
+  default     = "terraform-lb-backend-pool-addr"
 }
