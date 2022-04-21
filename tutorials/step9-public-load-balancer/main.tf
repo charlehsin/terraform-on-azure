@@ -1,28 +1,23 @@
 provider "azurerm" {
   features {}
 
-  tenant_id = "46c98d88-e344-4ed4-8496-4ed7712e255d"
+  tenant_id = var.tenant_id
 }
 
-resource "azurerm_public_ip" "public_ip" {
-  name                = "terraform-lb-ip"
-  resource_group_name = "MyMainEMAGroup"
-  location            = "westus2"
-  allocation_method   = "Static"
-  sku                 = "Standard"
-  sku_tier            = "Regional"
-  domain_name_label   = "lbcfterraformtest"
-}
+module "public_load_balancer" {
+  source = "../../modules/azure-public-load-balancer"
 
-resource "azurerm_lb" "lb" {
-  name                = "terraform-lb"
-  location            = "westus2"
-  resource_group_name = "MyMainEMAGroup"
-  sku                 = "Standard"
-  sku_tier            = "Regional"
+  resource_group_name         = var.resource_group_name
+  resource_group_location     = var.resource_group_location
+  public_ip_name              = var.public_ip["name"]
+  public_ip_allocation_method = var.public_ip["allocation_method"]
+  public_ip_sku               = var.public_ip["sku"]
+  public_ip_domain_name_label = var.public_ip["domain_name_label"]
+  load_balancer_name          = var.load_balancer["name"]
+  load_balancer_sku           = var.load_balancer["sku"]
+  frontend_ip_config_name     = var.frontend_ip_config_name
+  backend_address_pool_name   = var.backend_address_pool_name
+  lb_applications             = var.lb_applications
 
-  frontend_ip_configuration {
-    name                 = "PublicIPAddress"
-    public_ip_address_id = azurerm_public_ip.public_ip.id
-  }
+  depends_on = []
 }

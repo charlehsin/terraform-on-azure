@@ -26,6 +26,5 @@ References
 
 ## Backlog items to explore
 
-- Create load balancer and add a vm to it.
 - Create a traditional Azure AD, add users and let VM join.
 - Create an Azure AD B2C (tenant, user flow, etc).
