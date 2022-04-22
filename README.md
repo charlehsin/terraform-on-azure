@@ -26,7 +26,8 @@ References
 
 ## Backlog items to explore
 
-- Create a traditional Azure AD, add users and let VM join.
-   - [Azure AD domain service](https://docs.microsoft.com/en-us/azure/active-directory-domain-services/)
-- Install docker on Windows VM.
+- Install docker on Windows VM. Check if we can start docker engine and WSL2 on Windows start up.
+- Running a SQL server container on Windows VM.
+- Install SQL Management studio, IIS rewrite, IIS CORS, VS Code.
+- Terraform Packer
 - Create an Azure AD B2C (tenant, user flow, etc).
