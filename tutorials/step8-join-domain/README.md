@@ -16,7 +16,7 @@ The following articles are just for reference, and we did not use them in this e
 
 This is based on top of the terraform files in "step_7_upload_directories_to_vm".
 
-Make sure your AD service is up and running. Open a Bash. (It will be smoother if you are disconnected from VPN.)
+Make sure your AD service is up and running, and your security group has WinRM port open. Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
 1. Run "az account show" to find the tenant ID.
 2. Check the main.tf, variables.tf, and output.tf files. Update the following at variables.tf.

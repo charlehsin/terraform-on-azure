@@ -15,7 +15,7 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 - [Terraform Language Documentation](https://www.terraform.io/language)
 - [How To Structure a Terraform Project](https://www.digitalocean.com/community/tutorials/how-to-structure-a-terraform-project)
 
-Make sure your AD service is up and running and your existing security group rule is set up so that WinRM port is open. Open a Bash. (It will be smoother if you are disconnected from VPN.)
+Make sure your AD service is up and running, and your existing security group rule is set up so that WinRM port is open. Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
 1. Run "az account set --subscription <subscription_id_or_subscription_name>" to set correct subscription, and then "az account show" to find the tenant ID.
 2. Check secret.tfvars file and update the values. Also, update the following

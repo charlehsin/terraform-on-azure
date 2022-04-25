@@ -29,5 +29,4 @@ References
 - Install docker on Windows VM. Check if we can start docker engine and WSL2 on Windows start up.
 - Running a SQL server container on Windows VM.
 - Install SQL Management studio, IIS rewrite, IIS CORS, VS Code.
-- Terraform Packer
 - Create an Azure AD B2C (tenant, user flow, etc).
