@@ -1,13 +1,14 @@
-# Let Windows server VM join an existing domain by using modules
+# Let VM with custom image join an existing domain by using modules
 
-This creates a Windows server virtual machine in the existing infrastructure (existing resource group). This enables WinRM (via HTTP) on this virtual machine, then uploads some files, and then runs some remote commands. For the remote commands, we will use PowerShell scripts to do the following setups.
+This creates a virtual machine, using a custom image, in the existing infrastructure (existing resource group). This enables WinRM (via HTTP) on this virtual machine, then uploads some files, and then runs some remote commands. For the remote commands, we will use PowerShell scripts to do the following setups.
 
-1. Install IIS.
-2. Set up the DNS servers for the network adaptor so that the VM can talk to the ADDC and to the Azure DNS service.
-3. Add the computer to the domain.
-4. Delete the sensitive script file with credentials.  Note: This is just a temporary approach and should not be used in production. Need a more secure approach to handle the credentials.
+1. Set up the DNS servers for the network adaptor so that the VM can talk to the ADDC and to the Azure DNS service.
+2. Add the computer to the domain.
+3. Delete the sensitive script file with credentials.  Note: This is just a temporary approach and should not be used in production. Need a more secure approach to handle the credentials.
 
 Then this virtual machine is added to an existing load balancer.
+
+**_NOTE: The custom image can have IIS already installed. However, the custom image may not be domain-joined yet as it is more complicate to have access to the domain service while creating the custom image._**
 
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli), and we will follow the following
 
@@ -20,10 +21,10 @@ Make sure your AD service is up and running, and your existing security group ru
 
 1. Run "az account set --subscription <subscription_id_or_subscription_name>" to set correct subscription, and then "az account show" to find the tenant ID.
 2. Check secret.tfvars file and update the values. Also, update the following
-   - At to_upload/setup/setup_netadaptor.ps1
+   - At to-upload/setup/setup_netadaptor.ps1
       - The address of the ADDC.
       - The address ot the Azure DNS service for VMs.
-   - At to_upload/setup/setup_join_domain.ps1
+   - At to-upload/setup/setup_join_domain.ps1
       - Domain name
       - Domain credential
 3. Run "terraform init".

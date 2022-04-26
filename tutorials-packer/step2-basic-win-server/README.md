@@ -19,7 +19,7 @@ Open a Bash. (It will be smoother if you are disconnected from VPN.)
 3. Run "packer init ."
 4. Run "packer fmt ."
 5. Run "packer validate ."
-6. Run "packer build --var-file=input.pkrvars.hcl .".
+6. Run "packer build --var-file=inputs.pkrvars.hcl .".
    - This may take a while.
    - If the provisioner is stuck, press Ctrl+C to cancel the build and start the clean-up flow.
 7. The created image will be inside the specified resource group. You can see it on your Azure portal.
