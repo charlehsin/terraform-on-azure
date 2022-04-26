@@ -26,7 +26,6 @@ References
 
 ## Backlog items to explore
 
-- Install docker on Windows VM. Check if we can start docker engine and WSL2 on Windows start up.
-- Running a SQL server container on Windows VM.
+- Set up WSL2 on Windows.
 - Install SQL Management studio, IIS rewrite, IIS CORS, VS Code.
 - Create an Azure AD B2C (tenant, user flow, etc).

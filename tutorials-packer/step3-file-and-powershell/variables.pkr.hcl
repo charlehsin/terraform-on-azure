@@ -21,7 +21,7 @@ variable "location" {
 
 variable "file_upload_source" {
   type    = string
-  default = "./uploaded-files"
+  default = "./setup-files"
 }
 
 variable "file_upload_destination" {

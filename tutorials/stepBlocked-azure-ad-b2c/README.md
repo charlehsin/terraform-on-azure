@@ -1,6 +1,6 @@
 # Set up Azure Active Directory B2C
 
-This tutorial is blocked as terraform does not provide enough support for B2C setup yet. Check [Automating Azure AD B2C creation with Terraform](https://codez.deedx.cz/posts/automating-azure-ad-b2c-creation-with-terraform/) for more details.
+**_NOTE: This tutorial is blocked as terraform does not provide enough support for B2C setup yet. Check [Automating Azure AD B2C creation with Terraform](https://codez.deedx.cz/posts/automating-azure-ad-b2c-creation-with-terraform/) for more details._**
 
 ## Some useful commands
 
