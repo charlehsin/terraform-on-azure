@@ -25,7 +25,3 @@ References
 - scenarios: This is some sample codes for some target scenarios. This will use the common modules.
 
 ## Backlog items to explore
-
-- Set up WSL2 on Windows.
-- Install SQL Management studio, IIS rewrite, IIS CORS, VS Code.
-- Create an Azure AD B2C (tenant, user flow, etc).

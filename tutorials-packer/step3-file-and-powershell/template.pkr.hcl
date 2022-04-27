@@ -41,10 +41,23 @@ build {
     destination = var.file_upload_destination
   }
 
-  # Install IIS
+  # Install IIS. Download Visual Studio Code. Download SQL Server.
+  # Download SQL Server Management Studio. Install SQL Server Management Studio.
   provisioner "powershell" {
     inline = [
-      "Install-WindowsFeature -name Web-Server -IncludeManagementTools"
+      "Install-WindowsFeature -name Web-Server -IncludeManagementTools",
+      "Write-Output 'IIS is installed.'",
+      "$ProgressPreference = 'SilentlyContinue'",
+      "New-Item -Path '${var.file_download_destination}' -Name '${var.file_download_vscode_folder}' -ItemType 'directory'",
+      "Set-Location '${var.file_download_destination}/${var.file_download_vscode_folder}'",
+      "Invoke-WebRequest -Uri '${var.file_download_vscode_url}' -OutFile VSCodeUserSetup.exe",
+      "Write-Output 'VS Code installer is downloaded.'",
+      "New-Item -Path '${var.file_download_destination}' -Name '${var.file_download_sql_server_folder}' -ItemType 'directory'",
+      "Set-Location '${var.file_download_destination}/${var.file_download_sql_server_folder}'",
+      "Invoke-WebRequest -Uri '${var.file_download_sql_server_url}' -OutFile SQL2019-SSEI-Expr.exe",
+      "Write-Output 'SQL Server installer is downloaded.'",
+      "Invoke-WebRequest -Uri '${var.file_download_ssms_url}' -OutFile SSMS-Setup-ENU.exe",
+      "Write-Output 'SQL Server Management Studio installer is downloaded.'"
     ]
   }
 

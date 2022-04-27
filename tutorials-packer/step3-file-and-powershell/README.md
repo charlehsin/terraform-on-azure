@@ -1,10 +1,17 @@
 # Use File provisioner and Powershell provisioner
 
-We will create a [managed image](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource). This is using the basic Windows Server image, then we upload our target files, and then we install IIS.
+We will create a [managed image](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource). This is using the basic Windows Server image, then we do the following in order.
+
+1. Upload our target files.
+2. Install IIS.
+3. Download Visual Studio Code installer.
+4. Download SQL Server installer.
+5. Download SQL Server Management Studio installer.
 
 We did the authentication via Azure CLI as described by [Azure CLI](https://www.packer.io/plugins/builders/azure#azure-cli). We follow
 
 1. [File Provisioner](https://www.packer.io/docs/provisioners/file)
+2. [PowerShell Provisioner](https://www.packer.io/docs/provisioners/powershell)
 
 Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
