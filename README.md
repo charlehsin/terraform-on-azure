@@ -25,3 +25,7 @@ References
 - scenarios: This is some sample codes for some target scenarios. This will use the common modules.
 
 ## Backlog items to explore
+
+- Azure Functions
+- Azure API Management
+- Azure API Management with FUnctions

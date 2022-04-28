@@ -83,6 +83,18 @@ variable "virtual_machine_first_cmd_path" {
   type        = string
 }
 
+variable "source_image_publisher" {
+  description = "Publisher of the source image."
+  type        = string
+  default     = "MicrosoftWindowsServer"
+}
+
+variable "source_image_offer" {
+  description = "Offer of the source image."
+  type        = string
+  default     = "WindowsServer"
+}
+
 variable "source_image_sku" {
   description = "SKU of the source image."
   type        = string

@@ -50,8 +50,8 @@ resource "azurerm_windows_virtual_machine" "vm" {
   }
 
   source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
+    publisher = var.source_image_publisher
+    offer     = var.source_image_offer
     sku       = var.source_image_sku
     version   = "latest"
   }
