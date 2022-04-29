@@ -23,6 +23,7 @@ source "azure-arm" "basic-example" {
   managed_image_name                = var.image_name
   managed_image_resource_group_name = var.image_resource_group_name
   location                          = var.location
+  vm_size                           = var.vm_size
 
   communicator   = "winrm"
   winrm_use_ssl  = true
@@ -35,6 +36,38 @@ build {
   name    = "learn-packer"
   sources = ["sources.azure-arm.basic-example"]
 
+  # Enable WSL2 - step 1
+  provisioner "powershell" {
+    inline = [
+      "Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux",
+      "Write-Output 'Microsoft-Windows-Subsystem-Linux is enabled.'"
+    ]
+  }
+  # Enable WSL2 - step 2
+  provisioner "windows-restart" {
+    restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
+  }
+  # Enable WSL2 - step 3
+  provisioner "powershell" {
+    inline = [
+      "Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform",
+      "Write-Output 'VirtualMachinePlatform is enabled.'"
+    ]
+  }
+  # Enable WSL2 - step 4
+  provisioner "windows-restart" {
+    restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
+  }
+  # Enable WSL2 - step 5
+  provisioner "powershell" {
+    inline = [
+      "wsl --set-default-version 2",
+      "wsl --update",
+      "wsl --shutdown",
+      "Write-Output 'WSL2 is set up.'"
+    ]
+  }
+
   # Upload files
   provisioner "file" {
     source      = var.file_upload_source
@@ -43,9 +76,11 @@ build {
 
   # Install IIS. Download Visual Studio Code. Download SQL Server.
   # Download SQL Server Management Studio. Install SQL Server Management Studio.
+  # Install-WindowsFeature is only for Windows Server. For Windows Client, use the following
+  # Enable-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole, IIS-WebServer, IIS-CommonHttpFeatures, IIS-ManagementConsole, IIS-HttpErrors, IIS-HttpRedirect, IIS-WindowsAuthentication, IIS-StaticContent, IIS-DefaultDocument, IIS-HttpCompressionStatic, IIS-DirectoryBrowsing
   provisioner "powershell" {
     inline = [
-      "Install-WindowsFeature -name Web-Server -IncludeManagementTools",
+      "Enable-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole, IIS-WebServer, IIS-CommonHttpFeatures, IIS-ManagementConsole, IIS-HttpErrors, IIS-HttpRedirect, IIS-WindowsAuthentication, IIS-StaticContent, IIS-DefaultDocument, IIS-HttpCompressionStatic, IIS-DirectoryBrowsing",
       "Write-Output 'IIS is installed.'",
       "$ProgressPreference = 'SilentlyContinue'",
       "New-Item -Path '${var.file_download_destination}' -Name '${var.file_download_vscode_folder}' -ItemType 'directory'",
@@ -70,12 +105,10 @@ build {
       "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\SysPrepExternal\\Generalize' -Name '*'"
     ]
   }
-
   # Deprovision the image - step 2
   provisioner "windows-restart" {
     restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
   }
-
   # Deprovision the image - step 3
   provisioner "powershell" {
     inline = [

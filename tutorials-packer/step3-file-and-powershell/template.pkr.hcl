@@ -43,6 +43,8 @@ build {
 
   # Install IIS. Download Visual Studio Code. Download SQL Server.
   # Download SQL Server Management Studio. Install SQL Server Management Studio.
+  # Install-WindowsFeature is only for Windows Server. For Windows Client, use the following
+  # Enable-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole, IIS-WebServer, IIS-CommonHttpFeatures, IIS-ManagementConsole, IIS-HttpErrors, IIS-HttpRedirect, IIS-WindowsAuthentication, IIS-StaticContent, IIS-DefaultDocument, IIS-HttpCompressionStatic, IIS-DirectoryBrowsing
   provisioner "powershell" {
     inline = [
       "Install-WindowsFeature -name Web-Server -IncludeManagementTools",
@@ -70,12 +72,10 @@ build {
       "Remove-ItemProperty -Path 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\SysPrepExternal\\Generalize' -Name '*'"
     ]
   }
-
   # Deprovision the image - step 2
   provisioner "windows-restart" {
     restart_check_command = "powershell -command \"& {Write-Output 'restarted.'}\""
   }
-
   # Deprovision the image - step 3
   provisioner "powershell" {
     inline = [

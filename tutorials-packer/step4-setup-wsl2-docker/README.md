@@ -1,33 +1,33 @@
-# Set up WSL2 with Ubuntu and Docker on virtual machine running Windows 11
+# Set up WSL2 with Ubuntu on virtual machine running Windows 11
 
 **_NOTE: WSL2 is not supported on Windows Server 2019 or 2022 yet. We cannot use Docker Engine on WSL1. Check [WSL2 Support for Windows Server 2019
 ](https://github.com/MicrosoftDocs/WSL/issues/678) and [WSL 2 broken on Windows Server Preview](https://github.com/microsoft/WSL/issues/6301 ) for more details._**
 
-## Useful commands
+We will create a [managed image](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource). This is using the Windows 11 image, and then we do the following in order.
 
-Power Shell
+1. Set up WSL2 with Ubuntu. Since we cannot enter first user and password, in order to achieve unattended installation, all the setup on Ubuntu will be at root user.
+2. Upload our target files. It includes a setup.bat for the user to install Ubuntu and Docker on Ubuntu later.
+3. Install IIS.
+4. Download Visual Studio Code installer.
+5. Download SQL Server installer.
+6. Download SQL Server Management Studio installer.
 
-- Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName Microsoft-Windows-Subsystem-Linux
-- restart Windows
-- Enable-WindowsOptionalFeature -Online -NoRestart -FeatureName VirtualMachinePlatform
-- restart Windows
+We did the authentication via Azure CLI as described by [Azure CLI](https://www.packer.io/plugins/builders/azure#azure-cli). We follow
 
-Windows Shell
+1. [File Provisioner](https://www.packer.io/docs/provisioners/file)
+2. [PowerShell Provisioner](https://www.packer.io/docs/provisioners/powershell)
 
-- wsl --set-default-version 2
-- wsl --update
-- wsl --shutdown
-- wsl --install -d Ubuntu
-- timeout 60
-- restart windows
-- wsl -u root sudo apt-get remove docker docker-engine docker.io containerd runc
-- wsl -u root sudo apt-get update
-- wsl -u root sudo apt-get -y upgrade
-- wsl -u root sudo apt-get install ca-certificates curl gnupg lsb-release
-- wsl -u root /bin/bash -c "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg"
-- wsl -u root /bin/bash -c "echo 'deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null"
-- wsl -u root sudo apt-get update
-- wsl -u root sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-compose
+Open a Bash. (It will be smoother if you are disconnected from VPN.)
+
+1. Run "az account set --subscription <subscription_id_or_subscription_name>" to set correct subscription, and then "az account show" to find the tenant ID.
+2. Update input.pkrvars.hcl file.
+3. Run "packer init ."
+4. Run "packer fmt ."
+5. Run "packer validate ."
+6. Run "packer build --var-file=inputs.pkrvars.hcl ."
+   - This may take a while.
+   - If the provisioner is stuck, press Ctrl+C to cancel the build and start the clean-up flow.
+7. The created image will be inside the specified resource group. You can see it on your Azure portal.
 
 ## Useful commands for Docker
 
@@ -48,6 +48,14 @@ Sometimes, if we change the installed distro location, wsl.exe won't be recogniz
 2. Run "wsl --unregister Ubuntu" to unregister the Linux distro. We are assuming that Ubuntu is the distro.
 
 The above are also the commands to completely remove the Linux distro from wsl.
+
+## Trouble-shooting Packer failure
+
+- [How to configure logging for Packer](https://www.phillipsj.net/posts/how-to-configure-logging-for-packer/)
+- [Debugging Packer Builds](https://www.packer.io/docs/debugging)
+- Run "export PACKER_LOG=1"
+- Run "export PACKER_LOG_PATH="packerlog.txt""
+- Run "packer build -debug --var-file=inputs.pkrvars.hcl ."
 
 ## References
 

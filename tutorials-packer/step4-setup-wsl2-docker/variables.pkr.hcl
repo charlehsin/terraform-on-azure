@@ -1,16 +1,16 @@
 variable "server_image_publisher" {
   type    = string
-  default = "MicrosoftWindowsServer"
+  default = "MicrosoftWindowsDesktop"
 }
 
 variable "server_image_offer" {
   type    = string
-  default = "WindowsServer"
+  default = "windows-11"
 }
 
 variable "server_image_sku" {
   type    = string
-  default = "2019-Datacenter"
+  default = "win11-21h2-pro"
 }
 
 variable "image_name" {
@@ -27,6 +27,11 @@ variable "image_resource_group_name" {
 variable "location" {
   type    = string
   default = "West US 2"
+}
+
+variable "vm_size" {
+  type    = string
+  default = "Standard_D2s_v4"
 }
 
 variable "file_upload_source" {

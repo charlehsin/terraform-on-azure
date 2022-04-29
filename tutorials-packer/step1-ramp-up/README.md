@@ -18,6 +18,14 @@ This is just a list web posts to ramp up on Packer. We are following
 - packer validate .
 - packer build [file name]
 
+## Trouble-shooting Packer failure
+
+- [How to configure logging for Packer](https://www.phillipsj.net/posts/how-to-configure-logging-for-packer/)
+- [Debugging Packer Builds](https://www.packer.io/docs/debugging)
+- Run "export PACKER_LOG=1"
+- Run "export PACKER_LOG_PATH="packerlog.txt""
+- Run "packer build -debug ."
+
 ## References
 
 - [Get Started](https://learn.hashicorp.com/packer)
