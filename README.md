@@ -10,14 +10,6 @@ Some useful Azure CLI commands
 - az account show
 - az account set --subscription "<subscription_id_or_subscription_name>"
 
-References
-
-- [Get Started - Azure](https://learn.hashicorp.com/collections/terraform/azure-get-started)
-- [Set up Terraform and Azure CLI on Windows with Bash](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-windows-bash?tabs=bash)
-- [Authenticating using Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli)
-- [Terraform documentation for azurerm](https://registry.terraform.io/providers/hashicorp/azurerm/3.2.0)
-- [Terraform Language Documentation](https://www.terraform.io/language)
-
 ## Folder structure
 
 - tutorials: This is the basic terraform learning steps related to Azure.
@@ -26,6 +18,13 @@ References
 
 ## Backlog items to explore
 
+- HashiCorp Vault
 - Azure Functions
 - Azure API Management
 - Azure API Management with FUnctions
+
+## References
+
+- [Get Started - Azure](https://learn.hashicorp.com/collections/terraform/azure-get-started)
+- [Set up Terraform and Azure CLI on Windows with Bash](https://docs.microsoft.com/en-us/azure/developer/terraform/get-started-windows-bash?tabs=bash)
+- [Authenticating using Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli)

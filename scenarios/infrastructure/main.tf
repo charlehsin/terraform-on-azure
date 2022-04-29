@@ -35,34 +35,6 @@ module "security_group" {
   depends_on = [module.resource_group]
 }
 
-module "virtual_machine" {
-  source = "../../modules/azure-vm"
-
-  resource_group_name              = var.resource_group_name
-  resource_group_location          = var.resource_group_location
-  public_ip_name                   = var.public_ip["name"]
-  public_ip_allocation_method      = var.public_ip["allocation_method"]
-  public_ip_sku                    = var.public_ip["sku"]
-  public_ip_domain_name_label      = var.public_ip["domain_name_label"]
-  network_interface_name           = var.network_interface["name"]
-  ip_configuration_name            = var.network_interface["ip_configuration_name"]
-  subnet_id                        = module.vnet_subnet.subnet_id
-  security_group_id                = module.security_group.security_group_id
-  virtual_machine_name             = var.virtual_machine_name
-  virtual_machine_size             = var.virtual_machine_size
-  virtual_machine_admin_username   = var.virtual_machine_admin_username
-  virtual_machine_admin_password   = var.virtual_machine_admin_password
-  virtual_machine_timezone         = var.virtual_machine_timezone
-  virtual_machine_custom_data_path = "${path.module}/winrm.ps1"
-  virtual_machine_first_cmd_path   = "${path.module}/firstlogincommand.xml"
-  source_image_sku                 = var.source_image_sku
-  upload_source                    = "${path.module}/to_upload/"
-  upload_destination               = var.file_upload_target
-  remote_commands                  = var.remote_commands
-
-  depends_on = [module.resource_group, module.vnet_subnet, module.security_group]
-}
-
 module "public_load_balancer" {
   source = "../../modules/azure-public-load-balancer"
 
@@ -79,11 +51,4 @@ module "public_load_balancer" {
   lb_applications             = var.lb_applications
 
   depends_on = [module.resource_group]
-}
-
-resource "azurerm_lb_backend_address_pool_address" "example" {
-  name                    = var.backend_address_pool_address_name
-  backend_address_pool_id = module.public_load_balancer.backend_address_pool_id
-  virtual_network_id      = module.vnet_subnet.vnet_id
-  ip_address              = module.virtual_machine.virtual_machine_private_ip
 }

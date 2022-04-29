@@ -1,6 +1,8 @@
-# Create new infrastructure for a Windows server VM by using modules
+# Create a VM with custom image
 
-This creates a new infrastructure (new resource group) and creates a new Windows server virtual machine in this resource group. This enables WinRM (via HTTP) on this virtual machine, then uploads some files, and then runs some remote commands (installing IIS). Then this virtual machine is added to a public load balancer pool.
+This creates a virtual machine, using a custom image, in the existing infrastructure (existing resource group). Then this virtual machine is added to an existing load balancer.
+
+The custom images may have setup scripts that one can use to do further setup. This will not use Terraform WinRM.
 
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli), and we will follow the following
 
