@@ -1,6 +1,6 @@
 # Get started on Packer
 
-This is just a list web posts to ramp up on Packer. We are following
+This is just a list of web posts to ramp up on Packer. We are following
 
 1. [Install Packer](https://learn.hashicorp.com/tutorials/packer/get-started-install-cli?in=packer/docker-get-started)
 2. [Build an Image](https://learn.hashicorp.com/tutorials/packer/docker-get-started-build-image?in=packer/docker-get-started)
