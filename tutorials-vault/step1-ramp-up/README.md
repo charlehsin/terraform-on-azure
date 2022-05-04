@@ -18,7 +18,7 @@ Client side
 - export VAULT_TOKEN="root_token_value"
 - vault status
 
-## Useful commands on Bash to create secrets at server side
+## Useful commands on Bash to create secrets at client side
 
 - vault kv put -help
 - vault kv put secret/hello foo=world
@@ -28,7 +28,7 @@ Client side
 - vault kv delete secret/hello
 - vault kv undelete -versions=2 secret/hello
 
-## Useful commands on Bash to enable secret engine at server side
+## Useful commands on Bash to enable secret engine at client side
 
 - vault secrets enable -path=kv kv
 - vault secrets list
@@ -51,10 +51,14 @@ Client side
 
 - export VAULT_ADDR='http://127.0.0.1:8200'
 - vault operator init
-- vault operator unseal
+- vault operator unseal [key_value]
 - vault login
+   - By default, this uses the token to login.
 - vault operator seal
 
 ## References
 
 - [Vault by HashiCorp](https://www.vaultproject.io/)
+- [login](https://www.vaultproject.io/docs/commands/login)
+- [Authentication](https://www.vaultproject.io/docs/concepts/auth)
+- [Tokens](https://www.vaultproject.io/docs/concepts/tokens)

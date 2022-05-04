@@ -1,5 +1,9 @@
 # Use Vault with Terraform and Packer
 
+## Set up Vault
+
+1. Follow [Use GitHub auth method](../step2-auth-and-policy/README.md).
+
 ## References
 
 - [Inject Secrets into Terraform Using the Vault Provider](https://learn.hashicorp.com/tutorials/terraform/secrets-vault?in=vault/secrets-management)

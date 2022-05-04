@@ -18,7 +18,8 @@ Some useful Azure CLI commands
 
 ## Backlog items to explore
 
-- HashiCorp Vault
+- Terraform backend
+- HashiCorp Vault - terraform and packer
 - Azure Functions
 - Azure API Management
 - Azure API Management with FUnctions
