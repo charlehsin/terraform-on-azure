@@ -1,19 +1,3 @@
-variable "tenant_id" {
-  description = "Azure tenant ID."
-  type        = string
-  sensitive   = true
-}
-
-variable "resource_group_name" {
-  description = "Name of the resource group."
-  type        = string
-}
-
-variable "resource_group_location" {
-  description = "Location of the resource group."
-  type        = string
-}
-
 variable "public_ip" {
   description = "Properties of the public IP."
   type        = map(string)
