@@ -10,7 +10,7 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 - [azurerm_lb_backend_address_pool_address](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/lb_backend_address_pool_address)
 - [azurerm_network_interface_backend_address_pool_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/network_interface_backend_address_pool_association)
 
-Make sure your AD service is up and running. Open a Bash. (It will be smoother if you are disconnected from VPN.)
+Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
 1. Run "az account set --subscription <subscription_id_or_subscription_name>" to set correct subscription, and then "az account show" to find the tenant ID.
 2. Update secret.tfvars

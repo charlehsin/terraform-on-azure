@@ -8,12 +8,13 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 - [Write Terraform Configuration](https://learn.hashicorp.com/collections/terraform/configuration-language)
 - [Terraform Language Documentation](https://www.terraform.io/language)
 - [How To Structure a Terraform Project](https://www.digitalocean.com/community/tutorials/how-to-structure-a-terraform-project)
+- [Backends](https://www.terraform.io/language/settings/backends)
 
 Open a Bash. (It will be smoother if you are disconnected from VPN.)
 
 1. Run "az account set --subscription <subscription_id_or_subscription_name>" to set correct subscription, and then "az account show" to find the tenant ID.
-2. Check secret.tfvars file and update the values.
-3. Run "terraform init".
+2. Update secret.tfvars and backend.conf.
+3. Run "terraform init -backend-config=backend.conf".
 4. Run "terraform fmt -recursive".
 5. Run "terraform validate" to validate our configuration.
 6. Run "terraform plan -out main.tfplan -var-file=./secret.tfvars" to see what will be provisioned.
