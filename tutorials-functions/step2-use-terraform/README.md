@@ -23,7 +23,7 @@ Open a Bash.
 11. Run some output commands, e.g., "echo "$(terraform output storage_account_id)"", to verify the result.
 12. Visit https://<your_function_name>.azurewebsites.net/ to check that it is up and running.
 13. Go to LocalFunctionProj folder, and run "func azure functionapp publish <APP_NAME>".
-14. Visit target url path to check that it is up and running.
+14. Visit target url path, https://<your_function_name>.azurewebsites.net/api/HttpExample, to check that it is up and running.
 15. Go back from LocalFUnctionProj folder.
 16. Run "terraform plan -destroy -out main.destroy.tfplan -var-file=./secret.tfvars" and "terraform apply main.destroy.tfplan" to clean up the resources.
 

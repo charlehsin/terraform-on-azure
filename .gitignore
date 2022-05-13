@@ -33,3 +33,6 @@ override.tf.json
 
 # Ignore local Vault storage folder
 **/vault/data/*
+
+# Ignore the zipped Azure function app
+*temp-function-app.zip
