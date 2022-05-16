@@ -17,22 +17,23 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 - [How To Structure a Terraform Project](https://www.digitalocean.com/community/tutorials/how-to-structure-a-terraform-project)
 - [Backends](https://www.terraform.io/language/settings/backends)
 
-Make sure your AD service is up and running, and your existing security group rule is set up so that WinRM port is open. Open a Bash. (It will be smoother if you are disconnected from VPN.)
+Make sure your AD service is up and running, and your existing security group rule is set up so that WinRM port is open. Open a Bash.
 
-1. Run "az account set --subscription <subscription_id_or_subscription_name>" to set correct subscription, and then "az account show" to find the tenant ID.
-2. Update secret.tfvars and backend.conf. Also, update the following
+1. If you are behind corporate VPN, run "export HTTPS_PROXY=<proxy_https>" and "export HTTP_PROXY=<proxy_http>".
+2. Run "az account set --subscription <subscription_id_or_subscription_name>" to set correct subscription, and then "az account show" to find the tenant ID.
+3. Update secret.tfvars and backend.conf. Also, update the following
    - At to_upload/setup/setup_netadaptor.ps1
       - The address of the ADDC.
       - The address ot the Azure DNS service for VMs.
    - At to_upload/setup/setup_join_domain.ps1
       - Domain name
       - Domain credential
-3. Run "terraform init -backend-config=backend.conf".
-4. Run "terraform fmt -recursive".
-5. Run "terraform validate" to validate our configuration.
-6. Run "terraform plan -out main.tfplan -var-file=./secret.tfvars" to see what will be provisioned.
-7. Run "terraform apply main.tfplan" to do the provisioning.
-8. Run "terraform show" to see the new state.
-9. Run "terraform state list" to see the latest list of resources managed.
-10. Run some output commands, e.g., "echo "$(terraform output virtual_machine_id)"", to verify the result.
-11. Run "terraform plan -destroy -out main.destroy.tfplan -var-file=./secret.tfvars" and "terraform apply main.destroy.tfplan" to clean up the resources.
+4. Run "terraform init -backend-config=backend.conf".
+5. Run "terraform fmt -recursive".
+6. Run "terraform validate" to validate our configuration.
+7. Run "terraform plan -out main.tfplan -var-file=./secret.tfvars" to see what will be provisioned.
+8. Run "terraform apply main.tfplan" to do the provisioning.
+9. Run "terraform show" to see the new state.
+10. Run "terraform state list" to see the latest list of resources managed.
+11. Run some output commands, e.g., "echo "$(terraform output virtual_machine_id)"", to verify the result.
+12. Run "terraform plan -destroy -out main.destroy.tfplan -var-file=./secret.tfvars" and "terraform apply main.destroy.tfplan" to clean up the resources.

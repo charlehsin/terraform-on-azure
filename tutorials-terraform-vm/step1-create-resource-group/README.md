@@ -6,13 +6,14 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 
 Open a Bash.
 
-1. Run "az account show" to find the tenant ID.
-2. Check the main.tf, variables.tf, and output.tf files. Update the tenant ID at main.tf.
-3. Run "terraform init". If you are using VPN and your proxies are not set up correctly, you may need to disconnect from VPN.
-4. Run "terraform fmt" to auto format our .tf files.
-5. Run "terraform validate" to validate our configuration.
-6. Run "terraform plan -out main.tfplan" to see what will be provisioned.
-7. Run "terraform apply main.tfplan" to do the provisioning.
-8. Run "echo "$(terraform output resource_group_name)"" to verify the result.
-9. Run "az group show --name <resource_group_name>" to verify the result.
-10. Run "terraform plan -destroy -out main.destroy.tfplan" and "terraform apply main.destroy.tfplan" to clean up the resources.
+1. If you are behind corporate VPN, run "export HTTPS_PROXY=<proxy_https>" and "export HTTP_PROXY=<proxy_http>".
+2. Run "az account show" to find the tenant ID.
+3. Check the main.tf, variables.tf, and output.tf files. Update the tenant ID at main.tf.
+4. Run "terraform init". If you are using VPN and your proxies are not set up correctly, you may need to disconnect from VPN.
+5. Run "terraform fmt" to auto format our .tf files.
+6. Run "terraform validate" to validate our configuration.
+7. Run "terraform plan -out main.tfplan" to see what will be provisioned.
+8. Run "terraform apply main.tfplan" to do the provisioning.
+9. Run "echo "$(terraform output resource_group_name)"" to verify the result.
+10. Run "az group show --name <resource_group_name>" to verify the result.
+11. Run "terraform plan -destroy -out main.destroy.tfplan" and "terraform apply main.destroy.tfplan" to clean up the resources.

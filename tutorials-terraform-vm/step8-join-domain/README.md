@@ -16,28 +16,29 @@ The following articles are just for reference, and we did not use them in this e
 
 This is based on top of the terraform files in "step_7_upload_directories_to_vm".
 
-Make sure your AD service is up and running, and your security group has WinRM port open. Open a Bash. (It will be smoother if you are disconnected from VPN.)
+Make sure your AD service is up and running, and your security group has WinRM port open. Open a Bash.
 
-1. Run "az account show" to find the tenant ID.
-2. Check the main.tf, variables.tf, and output.tf files. Update the following at variables.tf.
+1. If you are behind corporate VPN, run "export HTTPS_PROXY=<proxy_https>" and "export HTTP_PROXY=<proxy_http>".
+2. Run "az account show" to find the tenant ID.
+3. Check the main.tf, variables.tf, and output.tf files. Update the following at variables.tf.
    - Tenant ID
    - Resource group name and location.
    - Subnet ID.
    - Security group ID.
    - VM account and password.
-3. Update the following
+4. Update the following
    - At to_upload/setup/setup_netadaptor.ps1
       - The address of the ADDC.
       - The address ot the Azure DNS service for VMs.
    - At to_upload/setup/setup_join_domain.ps1
       - Domain name
       - Domain credential
-4. Run "terraform init".
-5. Run "terraform fmt" to auto format our .tf files.
-6. Run "terraform validate" to validate our configuration.
-7. Run "terraform plan -out main.tfplan" to see what will be provisioned.
-8. Run "terraform apply main.tfplan" to do the provisioning.
-9. Run "terraform show" to see the new state.
-10. Run "terraform state list" to see the latest list of resources managed.
-11. Run some output commands, e.g., "echo "$(terraform output public_ip_fqdn)"", to verify the result.
-12. Run "terraform plan -destroy -out main.destroy.tfplan" and "terraform apply main.destroy.tfplan" to clean up the resources.
+5. Run "terraform init".
+6. Run "terraform fmt" to auto format our .tf files.
+7. Run "terraform validate" to validate our configuration.
+8. Run "terraform plan -out main.tfplan" to see what will be provisioned.
+9. Run "terraform apply main.tfplan" to do the provisioning.
+10. Run "terraform show" to see the new state.
+11. Run "terraform state list" to see the latest list of resources managed.
+12. Run some output commands, e.g., "echo "$(terraform output public_ip_fqdn)"", to verify the result.
+13. Run "terraform plan -destroy -out main.destroy.tfplan" and "terraform apply main.destroy.tfplan" to clean up the resources.

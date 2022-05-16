@@ -12,7 +12,7 @@ We did the authentication via Azure CLI as described by [Azure CLI](https://www.
 1. [vault Function](https://www.packer.io/docs/templates/hcl_templates/functions/contextual/vault)
 2. [Local Values](https://www.packer.io/docs/templates/hcl_templates/locals)
 
-Open a Bash. (It will be smoother if you are disconnected from VPN.)
+Open a Bash. If you are behind corporate VPN, run "export HTTPS_PROXY=<proxy_https>" and "export HTTP_PROXY=<proxy_http>".
 
 Set up secrets at Vault
 
@@ -45,7 +45,7 @@ We did the authentication via Azure CLI as described by [Authenticating using th
 1. [Vault Provider](https://registry.terraform.io/providers/hashicorp/vault/latest/docs)
 2. [Data sources - vault_generic_secret](https://registry.terraform.io/providers/hashicorp/vault/latest/docs/data-sources/generic_secret)
 
-Open a Bash. (It will be smoother if you are disconnected from VPN.)
+Open a Bash. If you are behind corporate VPN, run "export HTTPS_PROXY=<proxy_https>" and "export HTTP_PROXY=<proxy_http>".
 
 Set up secrets at Vault
 
