@@ -19,7 +19,7 @@ Some useful Azure CLI commands
 ## Backlog items to explore
 
 - Azure API Management
-- Azure API Management with FUnctions
+- Azure API Management with Functions
 
 ## References
 
