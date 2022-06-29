@@ -18,7 +18,7 @@ Some useful Azure CLI commands
 
 ## Backlog items to explore
 
-- Azure API Management - create a new api and mock api response
+- Azure API Management - import a new api and transform + protect it
 - Azure API Management with Functions
 
 ## References
