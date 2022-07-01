@@ -19,3 +19,30 @@ resource "azurerm_api_management_api" "example" {
     content_value  = var.azurerm_api_management_api_import_content_value
   }
 }
+
+resource "azurerm_api_management_api_policy" "example" {
+  api_name            = azurerm_api_management_api.example.name
+  api_management_name = azurerm_api_management_api.example.api_management_name
+  resource_group_name = azurerm_api_management_api.example.resource_group_name
+
+  xml_content = <<XML
+<policies>
+   <inbound>
+     <rate-limit-by-key calls="3" renewal-period="15" counter-key="@(context.Subscription.Id)" />
+     <base />
+   </inbound>
+   <backend>
+     <base />
+   </backend>
+   <outbound>
+     <set-header name="X-Powered-By" exists-action="delete" />
+     <set-header name="X-AspNet-Version" exists-action="delete" />
+     <redirect-content-urls />
+     <base />
+   </outbound>
+   <on-error>
+     <base />
+   </on-error>
+</policies>
+XML
+}

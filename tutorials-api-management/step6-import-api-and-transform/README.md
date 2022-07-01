@@ -1,4 +1,4 @@
-# Get started on using Terraform to import an API and transform the output to protect it
+# Get started on using Terraform to import an API and protect it
 
 This is based on the knowledge on top of "step2-create-instance" and "step3-import-api". We will use an existing API Management instance.
 
