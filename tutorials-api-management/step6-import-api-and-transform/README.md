@@ -1,14 +1,12 @@
-# Get started on using Terraform to mock an API response
+# Get started on using Terraform to import an API and transform the output to protect it
 
-This is based on the knowledge on top of "step2-create-instance". We will use an existing API Management instance.
+This is based on the knowledge on top of "step2-create-instance" and "step3-import-api". We will use an existing API Management instance.
 
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli), and we will follow the following
 
 - [azurerm_api_management_api](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api)
-- [azurerm_api_management_api_operation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_operation)
-- [azurerm_api_management_api_operation_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_operation_policy)
-- [Tutorial: Mock API responses](https://docs.microsoft.com/en-us/azure/api-management/mock-api-responses?tabs=azure-cli)
-- [Deploying Azure API Management using Terraform](https://www.jeanpaulsmit.com/2020/03/terraform-deploy-apim/)
+- [azurerm_api_management_api_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/api_management_api_policy)
+- [Tutorial: Transform and protect your API](https://docs.microsoft.com/en-us/azure/api-management/transform-api)
 
 Open a Bash.
 
@@ -22,7 +20,7 @@ Open a Bash.
 8. Run "terraform apply main.tfplan" to do the provisioning.
 9. Run "terraform show" to see the new state.
 10. Run "terraform state list" to see the latest list of resources managed.
-11. Run some output commands, e.g., "echo "$(terraform output azurerm_api_management_api_operation_id)"", to verify the result.
+11. Run some output commands, e.g., "echo "$(terraform output azurerm_api_management_api_id)"", to verify the result.
 12. Run "terraform plan -destroy -out main.destroy.tfplan -var-file=./secret.tfvars" and "terraform apply main.destroy.tfplan" to clean up the resources.
 
 ## References
