@@ -18,7 +18,6 @@ Some useful Azure CLI commands
 
 ## Backlog items to explore
 
-- Azure API Management - add multiple versions
 - Azure API Management with Functions
 
 ## References
