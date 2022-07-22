@@ -15,5 +15,5 @@ output "azurerm_api_management_developer_portal_url" {
 }
 
 output "azurerm_api_management_api_id" {
-  value = azurerm_api_management_api.example.id
+  value = module.azurerm_api_management_api.id
 }
