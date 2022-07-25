@@ -3,6 +3,11 @@ output "id" {
   value       = azurerm_api_management_api.api.id
 }
 
+output "name" {
+  description = "Name of the API."
+  value       = azurerm_api_management_api.api.name
+}
+
 output "is_current" {
   description = "Is the API current."
   value       = azurerm_api_management_api.api.is_current

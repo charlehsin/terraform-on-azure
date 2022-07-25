@@ -22,7 +22,7 @@ Open a Bash.
 8. Run "terraform apply main.tfplan" to do the provisioning.
 9. Run "terraform show" to see the new state.
 10. Run "terraform state list" to see the latest list of resources managed.
-11. Run some output commands, e.g., "echo "$(terraform output azurerm_api_management_api_operation_id)"", to verify the result.
+11. Run some output commands, e.g., "echo "$(terraform output api_operation_id)"", to verify the result.
 12. Run "terraform plan -destroy -out main.destroy.tfplan -var-file=./secret.tfvars" and "terraform apply main.destroy.tfplan" to clean up the resources.
 
 ## References

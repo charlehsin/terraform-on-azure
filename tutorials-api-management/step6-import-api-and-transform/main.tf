@@ -4,26 +4,26 @@ provider "azurerm" {
   tenant_id = var.tenant_id
 }
 
-resource "azurerm_api_management_api" "example" {
-  name                = var.azurerm_api_management_api_name
-  resource_group_name = data.azurerm_resource_group.example.name
-  api_management_name = data.azurerm_api_management.example.name
-  revision            = var.azurerm_api_management_api_revision
-  display_name        = var.azurerm_api_management_api_display_name
-  path                = var.azurerm_api_management_api_path
-  protocols           = var.azurerm_api_management_api_protocols
-  service_url         = var.azurerm_api_management_api_service_url
+module "azurerm_api_management_api" {
+  source = "../../modules/azure-api-management-api"
 
-  import {
-    content_format = var.azurerm_api_management_api_import_content_format
-    content_value  = var.azurerm_api_management_api_import_content_value
-  }
+  resource_group_name                              = data.azurerm_resource_group.example.name
+  azurerm_api_management_name                      = data.azurerm_api_management.example.name
+  azurerm_api_management_api_name                  = var.azurerm_api_management_api_name
+  azurerm_api_management_api_revision              = var.azurerm_api_management_api_revision
+  azurerm_api_management_api_display_name          = var.azurerm_api_management_api_display_name
+  azurerm_api_management_api_path                  = var.azurerm_api_management_api_path
+  azurerm_api_management_api_protocols             = var.azurerm_api_management_api_protocols
+  azurerm_api_management_api_service_url           = var.azurerm_api_management_api_service_url
+  azurerm_api_management_api_import_required       = true
+  azurerm_api_management_api_import_content_format = var.azurerm_api_management_api_import_content_format
+  azurerm_api_management_api_import_content_value  = var.azurerm_api_management_api_import_content_value
 }
 
 resource "azurerm_api_management_api_policy" "example" {
-  api_name            = azurerm_api_management_api.example.name
-  api_management_name = azurerm_api_management_api.example.api_management_name
-  resource_group_name = azurerm_api_management_api.example.resource_group_name
+  api_name            = module.azurerm_api_management_api.name
+  api_management_name = data.azurerm_api_management.example.name
+  resource_group_name = data.azurerm_resource_group.example.name
 
   xml_content = <<XML
 <policies>
