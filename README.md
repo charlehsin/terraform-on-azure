@@ -18,7 +18,6 @@ Some useful Azure CLI commands
 
 ## Backlog items to explore
 
-- Move API creation to a module: Currently, finished at step 6.
 - Azure API Management with Functions
 
 ## References

@@ -18,9 +18,16 @@ variable "azurerm_api_management_api_revision" {
   type        = string
 }
 
+variable "azurerm_api_management_api_revision_description" {
+  description = "Revision description of the API Management API."
+  type        = string
+  default     = ""
+}
+
 variable "azurerm_api_management_api_display_name" {
   description = "Display name of the API Management API."
   type        = string
+  default     = ""
 }
 
 variable "azurerm_api_management_api_path" {
@@ -36,6 +43,24 @@ variable "azurerm_api_management_api_protocols" {
 
 variable "azurerm_api_management_api_service_url" {
   description = "Backend service url of the API Management API."
+  type        = string
+  default     = ""
+}
+
+variable "azurerm_api_management_api_source_api_id" {
+  description = "Source API ID of the API Management API."
+  type        = string
+  default     = ""
+}
+
+variable "azurerm_api_management_api_version" {
+  description = "Version of the API Management API."
+  type        = string
+  default     = ""
+}
+
+variable "azurerm_api_management_api_version_set_id" {
+  description = "Version set ID of the API Management API."
   type        = string
   default     = ""
 }
