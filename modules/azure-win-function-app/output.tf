@@ -10,6 +10,10 @@ output "function_app_id" {
   value = azurerm_windows_function_app.example.id
 }
 
+output "function_app_name" {
+  value = azurerm_windows_function_app.example.name
+}
+
 output "function_app_kind" {
   value = azurerm_windows_function_app.example.kind
 }

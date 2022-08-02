@@ -1,0 +1,13 @@
+openapi: '3.0.3'
+info:
+  title: Dummy API
+  version: '1.0'
+servers:
+  - url: https://apim-example-cf-001.azure-api.net/dummy
+paths:
+  /HttpExample:
+    description: "Get dummy message."
+    get:
+      responses:
+        '200':
+          description: OK

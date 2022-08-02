@@ -18,7 +18,7 @@ Some useful Azure CLI commands
 
 ## Backlog items to explore
 
-- Azure API Management with Functions
+- Azure API Management with subscription, policies, and JWT
 
 ## References
 
