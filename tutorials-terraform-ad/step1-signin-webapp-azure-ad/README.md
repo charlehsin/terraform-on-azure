@@ -1,6 +1,6 @@
 # Set up Azure Active Directory and add sign-in to a web app
 
-This is to provide some tutorial web pages to add Azure AD sign-in to a web app via Azure Portal.
+This is to provide some tutorial web pages to add Azure AD sign-in to a web app via Azure Portal (, not via Terraform yet).
 
 1. Read [Quickstart: Create a new tenant in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-access-create-new-tenant) to create a new tenant in the existing Azure Active Directory.
 2. Read [Add or delete users using Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/add-users-azure-active-directory) to create new users.
@@ -12,3 +12,10 @@ This is to provide some tutorial web pages to add Azure AD sign-in to a web app 
    - After the web app is run in Visual Studio,
       - If Chrome or Edge browser is used, the currently Windows log-in account will be used if it is a valid one.
       - If Firefox browser is used, you can log in with other user account.
+
+## References
+
+- [From the Implicit flow to PKCE: A look at OAuth 2.0 in SPAs](https://pragmaticwebsecurity.com/articles/oauthoidc/from-implicit-to-pkce.html)
+- [What is the Microsoft identity platform?](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-overview)
+- [Getting started with MSAL.NET](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet/wiki)
+- [Getting started with MSAL.JS](https://github.com/AzureAD/microsoft-authentication-library-for-js/wiki)
