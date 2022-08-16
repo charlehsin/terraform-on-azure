@@ -18,7 +18,8 @@ Some useful Azure CLI commands
 
 ## Backlog items to explore
 
-- Use terraform to set up Azure AD tenant and register app.
+- Use terraform to create Azure AD user and register app.
+  - Note: Currently, there is no Powershell/Azure CLI/Terraform way to create a tenant in Azure AD. However, Terraform has support to create new user and register app.
 - Azure API Management with subscription, policies, and JWT.
 
 ## References
