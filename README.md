@@ -18,7 +18,6 @@ Some useful Azure CLI commands
 
 ## Backlog items to explore
 
-- Use terraform to register app in Azure AD.
 - Azure API Management with subscription, policies, and JWT.
 
 ## References
