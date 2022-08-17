@@ -1,8 +1,8 @@
-# Get started on using Terraform to register a web app in Azure Active Directory
+# Get started on using Terraform to register a single page app in Azure Active Directory
 
 Currently, Terraform has no support to create a tenant in AZure Active Directory. Follow [Quickstart: Create a new tenant in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-access-create-new-tenant) to create a tenant manually if needed. Also follow [step4-add-ad-user](../step4-add-ad-user/README.md) to create users if needed.
 
-This will register an app similar to [step1-signin-webapp-azure-ad](../step1-signin-webapp-azure-ad/README.md).
+This will register an app similar to [step2-signin-spa-azure-ad](../step2-signin-spa-azure-ad/README.md).
 
 We did the authentication via Azure CLI as described by [Authenticating using the Azure CLI](https://registry.terraform.io/providers/hashicorp/azuread/latest/docs/guides/azure_cli).
 
